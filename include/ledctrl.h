@@ -39,31 +39,37 @@ struct PinConfig {
 struct ColorStorage {
     HSVCT current;
     void load(bool print = false) {
-    	StaticJsonDocument<128> doc;
-        if (Json::loadFromFile(doc, APP_COLOR_FILE)) {
-            JsonObject root = doc.as<JsonObject>();
+        StaticJsonBuffer < 72 > jsonBuffer;
+        if (exist()) {
+            int size = fileGetSize(APP_COLOR_FILE);
+            char* jsonString = new char[size + 1];
+            fileGetContent(APP_COLOR_FILE, jsonString, size + 1);
+            JsonObject& root = jsonBuffer.parseObject(jsonString);
             current.h = root["h"];
             current.s = root["s"];
             current.v = root["v"];
             current.ct = root["ct"];
             if (print) {
-            	Json::serialize(root, Serial, Json::Pretty);
+                root.prettyPrintTo(Serial);
             }
+            delete[] jsonString;
         }
     }
 
     void save(bool print = false) {
         debug_d("Saving ColorStorage to file...");
-        StaticJsonDocument<256> doc;
-        JsonObject root = doc.to<JsonObject>();
+        DynamicJsonBuffer jsonBuffer;
+        JsonObject& root = jsonBuffer.createObject();
         root["h"] = current.h;
         root["s"] = current.s;
         root["v"] = current.v;
         root["ct"] = current.ct;
+        String rootString;
         if (print) {
-        	Json::serialize(root, Serial, Json::Pretty);
+            root.prettyPrintTo(Serial);
         }
-        Json::saveToFile(root, APP_COLOR_FILE);
+        root.printTo(rootString);
+        fileSetContent(APP_COLOR_FILE, rootString);
     }
 
     bool exist() {
