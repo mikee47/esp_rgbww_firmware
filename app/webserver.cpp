@@ -567,7 +567,7 @@ void ApplicationWebserver::onConfig(HttpRequest &request, HttpResponse &response
                     Json::getValue(jchannel[F("pin")], channel.pin);
                     Json::getValue(jchannel[F("name")], channel.name);
                     debug_i("adding channel %i with name %s",channel.pin, channel.name);
-                    app.cfg.general.channels.push_back(channel);
+                    app.cfg.general.channels.add(channel);
                 }
             }
         }

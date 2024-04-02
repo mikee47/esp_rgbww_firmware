@@ -75,21 +75,21 @@ PinConfig APPLedCtrl::parsePinConfigString(String& pinStr) {
     return cfg;
 }
 
-PinConfig APPLedCtrl::parsePinConfigRGBWW(std::vector<channel> channels){
+PinConfig APPLedCtrl::parsePinConfigRGBWW(const Vector<channel>& channels){
     PinConfig cfg;
 
     debug_i("getting pin configuration from channels array");
-    for(int i=0;i<channels.size();i++){
-        if(channels[i].name == "red"){
-            cfg.red = channels[i].pin;
-        }else if(channels[i].name == "green"){
-            cfg.green = channels[i].pin;
-        }else  if(channels[i].name == "blue"){
-            cfg.blue = channels[i].pin;
-        }else if(channels[i].name == "warmwhite"){
-            cfg.warmwhite = channels[i].pin;
-        }else if(channels[i].name == "coldwhite"){
-            cfg.coldwhite = channels[i].pin;
+    for(auto& channel: channels) {
+        if(channel.name == "red"){
+            cfg.red = channel.pin;
+        }else if(channel.name == "green"){
+            cfg.green = channel.pin;
+        }else  if(channel.name == "blue"){
+            cfg.blue = channel.pin;
+        }else if(channel.name == "warmwhite"){
+            cfg.warmwhite = channel.pin;
+        }else if(channel.name == "coldwhite"){
+            cfg.coldwhite = channel.pin;
         }
     }
     return cfg;

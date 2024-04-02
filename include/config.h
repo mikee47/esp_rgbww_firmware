@@ -151,12 +151,12 @@ struct ApplicationSettings {
         #ifdef ESP8266
         // String supported_color_models="[\"RGB\",\"RGBW\",\"RGBWW\",\"RAW\")]";
         // can't just stuff a string in here and hope it'll be interpreted as an array, this has to be a vector, too
-        std::vector<String> supported_color_models;
+        Vector<String> supported_color_models;
         #endif
         String pin_config_name="mrpj";
         String pin_config_url="https://raw.githubusercontent.com/pljakobs/esp_rgb_webapp2/devel/public/config/pinconfig.json";
 
-        std::vector<channel> channels;
+        Vector<channel> channels;
         String pin_config = "13,12,14,5,4";
         String buttons_config;
         int buttons_debounce_ms = 50;
@@ -399,11 +399,11 @@ struct ApplicationSettings {
             cfg.general.pin_config_name="mrpw"; //set a sensible default. Other configs can be read from the pinconfig json source either on github or in spiffs. 
         debug_i("populating channels array");
         if (cfg.general.channels.size() == 0 && cfg.general.pin_config_name == "mrpj") {
-            cfg.general.channels.push_back({ "red", 13 });
-            cfg.general.channels.push_back({ "green", 12 });
-            cfg.general.channels.push_back({ "blue", 14 });
-            cfg.general.channels.push_back({ "warmwhite", 5 });
-            cfg.general.channels.push_back({ "coldwhite", 4 });
+            cfg.general.channels.add({ "red", 13 });
+            cfg.general.channels.add({ "green", 12 });
+            cfg.general.channels.add({ "blue", 14 });
+            cfg.general.channels.add({ "warmwhite", 5 });
+            cfg.general.channels.add({ "coldwhite", 4 });
         }
         debug_i("added %i elements to channels array", cfg.general.channels.size());
         for (uint8_t i=0;i<cfg.general.channels.size();i++) {
@@ -411,10 +411,10 @@ struct ApplicationSettings {
         }
         #ifdef ARCH_ESP8266
         if (cfg.general.supported_color_models.size() == 0) {
-            cfg.general.supported_color_models.push_back("RGB");
-            cfg.general.supported_color_models.push_back("RGBW");
-            cfg.general.supported_color_models.push_back("RGBWW");
-            cfg.general.supported_color_models.push_back("RAW");
+            cfg.general.supported_color_models.add("RGB");
+            cfg.general.supported_color_models.add("RGBW");
+            cfg.general.supported_color_models.add("RGBWW");
+            cfg.general.supported_color_models.add("RAW");
         }
         #endif
     }

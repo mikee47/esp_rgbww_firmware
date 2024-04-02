@@ -92,7 +92,7 @@ public:
     virtual void onAnimationFinished(const String& name, bool requeued);
 private:
     static PinConfig parsePinConfigString(String& pinStr);
-    static PinConfig parsePinConfigRGBWW(std::vector<channel> channels); // legacy compatibility function to provide new API without having to re-write the backend yet
+    static PinConfig parsePinConfigRGBWW(const Vector<channel>& channels); // legacy compatibility function to provide new API without having to re-write the backend yet
     static void updateLedCb(void* pTimerArg);
     void publishToEventServer();
     void publishToMqtt();
