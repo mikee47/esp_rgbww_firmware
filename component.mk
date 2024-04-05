@@ -1,6 +1,5 @@
 COMPONENT_SEARCH_DIRS := $(PROJECT_DIR)/Components
-COMPONENT_DEPENDS += MDNS RGBWWLed
-ARDUINO_LIBRARIES := RGBWWLed ArduinoJson6 OtaNetwork
+COMPONENT_DEPENDS := MDNS RGBWWLed ArduinoJson6 OtaNetwork
 
 
 #HWCONFIG := two-spiffs-two-roms
@@ -72,3 +71,18 @@ ifndef PART_LAYOUT
 	$(info partition layout not defined, defaulting to v1)
 	PART_LAYOUT=v1
 endif
+
+
+
+# GLOBAL_CFLAGS += \
+#   -DIP_REASSEMBLY=1 \
+#   -DIP_FRAG=1 \
+#   -DIP_REASS_MAXAGE=3 \
+#   -DLWIP_NETIF_TX_SINGLE_PBUF=0 \
+#   -DIP_REASS_DEBUG=1 \
+#   -DIP_DEBUG=1 \
+#   -DTCP_DEBUG=1 \
+#   -DTCP_INPUT_DEBUG=1
+
+# ENABLE_CUSTOM_LWIP = 2
+# ENABLE_LWIP_DEBUG = 1

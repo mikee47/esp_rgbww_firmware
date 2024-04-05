@@ -745,7 +745,7 @@ void ApplicationWebserver::onConfig(HttpRequest &request, HttpResponse &response
             supported_color_models.add(color_model);
         }
         response.setAllowCrossDomainOrigin("*");
-        debug_i("sending config json of size %i",sizeof(stream));
+        debug_i("sending config json of size %u, free heap %u", stream->available(), system_get_free_heap_size());
         sendApiResponse(response, stream);
     }
 }

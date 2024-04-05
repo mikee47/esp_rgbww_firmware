@@ -135,7 +135,7 @@ void AppWIFI::init() {
     if (app.isFirstRun()) {
         debug_i("AppWIFI::init initial run - setting up AP, ssid: ");
         String SSID=String(DEFAULT_AP_SSIDPREFIX) + String(system_get_chip_id());
-        printf("%s",SSID);
+        printf("%s",SSID.c_str());
         app.cfg.network.connection.mdnshostname = String(DEFAULT_AP_SSIDPREFIX) + String(system_get_chip_id());
         app.cfg.network.ap.ssid = String(DEFAULT_AP_SSIDPREFIX) + String(system_get_chip_id());
         app.cfg.save();
